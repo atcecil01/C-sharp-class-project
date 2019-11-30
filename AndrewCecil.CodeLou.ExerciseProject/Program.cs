@@ -19,7 +19,6 @@ namespace AndrewCecil.CodeLou.ExerciseProject
             {
                 //Add studentRecord to StudentRepository
                 StudentRepository.Add(student.Key, student.Value);
-                Console.WriteLine(student.Key + "||" + student.Value);
             }
 
             bool exit = false;
@@ -71,10 +70,30 @@ namespace AndrewCecil.CodeLou.ExerciseProject
                         }
                         Console.WriteLine("Enter Start Date in format MM/dd/YYYY");
                         success = DateTimeOffset.TryParse(Console.ReadLine(), out var startDate);
+                        if (success == true)
+                        {
+                            var value = startDate.CompareTo(lastCompletedOn);
+                            if (value >= 0)
+                            {
+                                success = false;
+                                Console.Write("Start Date should be prior to the date of last class completed. ");
+                            }
+
+                        }
                         while (success == false)
                         {
                             Console.WriteLine("Enter Start Date in format MM/dd/YYYY");
                             success = DateTimeOffset.TryParse(Console.ReadLine(), out startDate);
+                            if (success == true)
+                            {
+                                var value = startDate.CompareTo(lastCompletedOn);
+                                if (value >= 0)
+                                {
+                                    success = false;
+                                    Console.Write("Start Date should be prior to the date of last class completed. ");
+                                }
+
+                            }
                         }
 
                         var studentRecord = new Student();
@@ -124,9 +143,6 @@ namespace AndrewCecil.CodeLou.ExerciseProject
                             Console.WriteLine($"{studentRecord.StudentId} | {studentRecord.FirstName} {studentRecord.LastName} | {studentRecord.ClassName} ");
                         }
                     }
-                    //var studentRecord = StudentRepository.Get(input);
-                    //Console.WriteLine($"Student Id | Name |  Class ");
-                    //Console.WriteLine($"{studentRecord.StudentId} | {studentRecord.FirstName} {studentRecord.LastName} | {studentRecord.ClassName} ");
                 }
                 else if (selection == 4)
                 {
