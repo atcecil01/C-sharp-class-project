@@ -6,19 +6,16 @@ namespace AndrewCecil.CodeLou.ExerciseProject
 {
     public static class StudentRepository
     {
-        public static Dictionary<string, Student> studentRepository = new Dictionary<string, Student>();
-        
-        //private List<Student> AllStudents => Students.Values.ToList();
+        public static Dictionary<int, Student> studentRepository = new Dictionary<int, Student>();
 
-
-        public static void Add(Student student)
+        public static void Add(int key, Student student)
         {
-            studentRepository.Add((student.FirstName + " " + student.LastName), student);
+            studentRepository.Add(student.StudentId, student);
         }
 
-        public static Student Get(string studentName)
+        public static Student Get(int studentId)
         {
-            return studentRepository[studentName];
+            return studentRepository[studentId];
         }
     }
 }
